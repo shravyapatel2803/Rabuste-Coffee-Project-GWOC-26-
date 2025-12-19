@@ -1,18 +1,39 @@
-/* Import Google Fonts for that "Art Gallery" look */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=JetBrains+Mono:wght@400&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Smooth scrolling for the single-page nav */
-html {
-  scroll-behavior: smooth;
-  background-color: #050505; /* Ensures no white flash on load */
+@layer base {
+  :root {
+    /* Light Mode Theme */
+    --color-bg: 255 255 255;       /* White */
+    --color-surface: 243 244 246;  /* Gray-100 */
+    --color-text: 55,55,55;        /* Neutral-900 */
+    --color-muted: 107 114 128;    /* Gray-500 */
+    --color-gold: 180 142 30;      /* Slightly darker gold for light mode visibility */
+    --color-orange: 194 94 0;      /* Rabuste Orange */
+  }
+
+  .dark {
+    /* Dark Mode Theme (Your Original Colors) */
+    --color-bg: 5 5 5;             /* #050505 */
+    --color-surface: 18 18 18;     /* #121212 */
+    --color-text: 200,200,200;     /* #e5e5e5 */
+    --color-muted: 163 163 163;    /* #a3a3a3 */
+    --color-gold: 212 175 55;      /* #D4AF37 */
+    --color-orange: 194 94 0;      /* #C25E00 */
+  }
 }
 
-/* Custom selection color to match brand */
+html {
+  scroll-behavior: smooth;
+  /* Use the variable so the background switches automatically */
+  background-color: rgb(var(--color-bg)); 
+  color: rgb(var(--color-text));
+}
+
 ::selection {
-  background-color: #C25E00; /* Rabuste Orange */
+  background-color: rgb(var(--color-orange));
   color: white;
 }

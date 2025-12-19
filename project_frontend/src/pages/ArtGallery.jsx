@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom"; // Import Link for navigation
 import API from "../api/api";
 
-const ArtGallery = () => {
+const ArtGallery = ({ isPreview = false }) => {
   const [artworks, setArtworks] = useState([]);
 
   useEffect(() => {
@@ -17,12 +18,15 @@ const ArtGallery = () => {
     fetchArt();
   }, []);
 
+  // If in preview mode, show only the first 3 items
+  const displayedArtworks = isPreview ? artworks.slice(0, 3) : artworks;
+
   return (
     <div className="px-6 py-12">
       <h1 className="text-3xl font-bold text-center mb-10">Art Gallery</h1>
 
       <div className="grid md:grid-cols-3 gap-8">
-        {artworks.map((art) => (
+        {displayedArtworks.map((art) => (
           <div key={art._id} className="rounded overflow-hidden shadow">
             <img
               src={art.image}
@@ -36,6 +40,18 @@ const ArtGallery = () => {
           </div>
         ))}
       </div>
+
+      {/* Show "See More" button only in preview mode */}
+      {isPreview && (
+        <div className="flex justify-center mt-10">
+          <Link 
+            to="/gallery" 
+            className="px-8 py-3 bg-rabuste-orange text-white font-bold tracking-widest uppercase rounded-sm hover:bg-rabuste-gold transition-colors"
+          >
+            See More
+          </Link>
+        </div>
+      )}
     </div>
   );
 };

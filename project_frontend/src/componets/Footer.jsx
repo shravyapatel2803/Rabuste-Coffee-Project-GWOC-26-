@@ -31,7 +31,18 @@ const Footer = () => {
           <div>
             <h4 className="font-bold uppercase tracking-[0.2em] text-xs text-rabuste-gold mb-6">Visit</h4>
             <div className="space-y-4 text-sm text-gray-400 font-medium">
-              <p>123 Artisan Avenue<br/>Coffee District, NY 10012</p>
+              <div className="w-full max-w-[300px] overflow-hidden rounded-lg opacity-80 hover:opacity-100 transition-opacity">
+              <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1337.3376772876818!2d72.77109196269188!3d21.161730349190787!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be04d00111b19b5%3A0xba45eb84da00c79f!2sRABUSTE!5e1!3m2!1sen!2sin!4v1766051429585!5m2!1sen!2sin" 
+                width="100%" 
+                height="200" 
+                style={{ border: 0 }} 
+                allowFullScreen="" 
+                loading="lazy" 
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Google Map Location"
+              ></iframe>
+            </div>
               <p className="pt-4">Mon - Sun<br/>07:00 AM - 10:00 PM</p>
             </div>
           </div>
@@ -39,11 +50,10 @@ const Footer = () => {
       </div>
 
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center pt-8 border-t border-white/5 text-xs text-gray-600 font-medium uppercase tracking-wider">
-        <p>&copy; 2024 Rabuste Coffee Project.</p>
+        <p>&copy; 2025 Rabuste Coffee Project.</p>
         <div className="flex gap-8 mt-4 md:mt-0">
-          <a href="#" className="hover:text-white transition-colors">Instagram</a>
-          <a href="#" className="hover:text-white transition-colors">Twitter</a>
-          <a href="#" className="hover:text-white transition-colors">LinkedIn</a>
+          <a href="https://www.instagram.com/rabuste.coffee/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Instagram</a>
+          <a href="https://www.facebook.com/369626482902125?ref=pl_edit_xav_ig_profile_page_web_bt" target='_blank' className="hover:text-white transition-colors">Facebook</a>
         </div>
       </div>
     </footer>

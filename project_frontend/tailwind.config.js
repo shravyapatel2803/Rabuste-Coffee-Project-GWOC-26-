@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  darkMode: 'class', // Enable class-based dark mode
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
@@ -7,18 +8,19 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // Defining the custom colors used in your components
         rabuste: {
-          bg: '#050505',       // Very dark background for "Bold" look
-          surface: '#121212',  // Slightly lighter for cards/sections
-          text: '#e5e5e5',     // Main text color
-          muted: '#a3a3a3',    // Secondary text
-          gold: '#D4AF37',     // Accent for luxury/art feel
-          orange: '#C25E00',   // "Robusta" rust/energy color
+          // dynamic colors using CSS variables
+          bg: 'rgb(var(--bg) / <alpha-value>)',       
+          surface: 'rgb(var(--surface) / <alpha-value>)',  
+          text: 'rgb(var(--text) / <alpha-value>)',     
+          muted: 'rgb(var(--muted) / <alpha-value>)',    
+          
+          // static brand colors
+          gold: '#D4AF37',     
+          orange: '#C25E00',   
         }
       },
       fontFamily: {
-        // Matching the "font-serif" and "font-sans" usage
         serif: ['"Playfair Display"', 'serif'],
         sans: ['"Inter"', 'sans-serif'],
         mono: ['"JetBrains Mono"', 'monospace'],
