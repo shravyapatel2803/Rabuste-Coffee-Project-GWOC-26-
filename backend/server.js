@@ -3,7 +3,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import connectDB from "./config/db.js";
 
-import menuRoutes from "./routes/menuRoutes.js";
+import itemRoutes from "./routes/item.routes.js";
 import artRoutes from "./routes/artRoutes.js";
 import workshopRoutes from "./routes/workshopRoutes.js";
 
@@ -19,11 +19,11 @@ app.get("/", (req, res) => {
   res.status(200).send("Rabuste Backend Running 🚀");
 });
 
-app.use("/api/menu", menuRoutes);
+app.use("/api/items", itemRoutes);
 app.use("/api/art", artRoutes);
 app.use("/api/workshops", workshopRoutes);
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5001;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
