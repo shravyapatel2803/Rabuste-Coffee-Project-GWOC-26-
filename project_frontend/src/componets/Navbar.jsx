@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom'; // Import useLocation
 import { Coffee, Menu, X, Sun, Moon } from 'lucide-react';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [isDark, setIsDark] = useState(true);
+  const location = useLocation(); // Get current route
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -44,7 +45,6 @@ const Navbar = () => {
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 md:px-6 flex justify-between items-center">
-          {/* Logo */}
           <Link to="/" className="flex items-center gap-2 group z-50">
             <div className="bg-rabuste-orange p-1.5 rounded-sm shadow-lg shadow-orange-600/20 group-hover:bg-rabuste-gold transition-colors">
               <Coffee className="w-5 h-5 text-white" />
@@ -56,15 +56,21 @@ const Navbar = () => {
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <Link 
-                key={link.name} 
-                to={link.href} 
-                className="text-xs font-bold uppercase tracking-[0.2em] text-rabuste-muted hover:text-rabuste-gold transition-colors"
-              >
-                {link.name}
-              </Link>
-            ))}
+            {navLinks.map((link) => {
+              // Check if this link is active
+              const isActive = location.pathname === link.href;
+              return (
+                <Link 
+                  key={link.name} 
+                  to={link.href} 
+                  className={`text-xs font-bold uppercase tracking-[0.2em] transition-colors ${
+                    isActive ? 'text-rabuste-gold' : 'text-rabuste-muted hover:text-rabuste-gold'
+                  }`}
+                >
+                  {link.name}
+                </Link>
+              );
+            })}
             
             <button onClick={toggleTheme} className="p-2 text-rabuste-text hover:text-rabuste-orange transition-colors">
               {isDark ? <Sun size={20} /> : <Moon size={20} />}
@@ -84,7 +90,7 @@ const Navbar = () => {
               {isDark ? <Sun size={20} /> : <Moon size={20} />}
             </button>
             <button 
-              className="text-rabuste-text p-2 hover:bg-rabuste-text/5 rounded-full active:scale-95 transition-transform"
+              className="text-rabuste-text p-2 hover:bg-rabuste-text/5 rounded-full"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
               {isMenuOpen ? <X /> : <Menu />}
@@ -108,19 +114,19 @@ const Navbar = () => {
                 <Link 
                   key={link.name} 
                   to={link.href} 
-                  className="text-3xl font-serif text-rabuste-text hover:text-rabuste-orange transition-colors"
+                  className={`text-3xl font-serif transition-colors ${
+                    location.pathname === link.href ? 'text-rabuste-gold' : 'text-rabuste-text'
+                  }`}
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {link.name}
                 </Link>
               ))}
               
-              <div className="w-16 h-[1px] bg-rabuste-text/10 my-2"></div>
-              
               <Link 
                 to="/book-table"
                 onClick={() => setIsMenuOpen(false)}
-                className="w-full max-w-xs py-4 bg-rabuste-orange text-white font-bold tracking-widest uppercase rounded-sm text-center shadow-lg shadow-orange-500/20 active:scale-95 transition-transform"
+                className="w-full max-w-xs py-4 bg-rabuste-orange text-white font-bold tracking-widest uppercase rounded-sm text-center shadow-lg"
               >
                 Book a Table
               </Link>
