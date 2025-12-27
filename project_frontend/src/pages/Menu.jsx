@@ -12,7 +12,7 @@ const Menu = ({ isPreview = false }) => {
   useEffect(() => {
     const fetchMenu = async () => {
       try {
-        const res = await API.get("/items/menu");
+        const res = await API.get("/menu");
         setMenuItems(res.data);
       } catch (error) {
         console.error("Menu fetch error:", error);
@@ -92,6 +92,7 @@ const Menu = ({ isPreview = false }) => {
             transition={{ duration: 0.3 }}
             className="space-y-16"
           >
+            <h1 className="text-3xl md:text-5xl font-serif font-bold text-rabuste-text text-center">Menu</h1>
             {displayGroups.map((group) => {
                const isAllView = activeCategory === "all";
                const limit = isAllView ? 4 : group.items.length;
@@ -99,6 +100,7 @@ const Menu = ({ isPreview = false }) => {
                const hasMore = group.items.length > limit;
 
                return (
+                <>                
                 <div key={group.category}>
                   {/* 5. CATEGORY TITLE: Dynamic text color */}
                   <h3 className="text-2xl font-serif text-rabuste-text mb-8 capitalize border-l-2 border-rabuste-orange pl-4 flex items-center justify-between">
@@ -133,7 +135,7 @@ const Menu = ({ isPreview = false }) => {
                             <img 
                               src={item.image.url} 
                               alt={item.name} 
-                              className="w-12 h-12 object-cover rounded-full opacity-60 group-hover:opacity-100 transition-opacity grayscale group-hover:grayscale-0"
+                              className="w-13 h-12 object-cover rounded-full "
                             />
                           )}
                           
@@ -158,8 +160,11 @@ const Menu = ({ isPreview = false }) => {
                     </div>
                   )}
                 </div>
+              </>
               );
-            })}
+            }
+            )
+          }
           </motion.div>
         </AnimatePresence>
       </div>

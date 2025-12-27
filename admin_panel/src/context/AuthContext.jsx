@@ -16,8 +16,12 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const login = (username, password) => {
-    // DUMMY CREDENTIALS: admin / 1234
-    if (username === "admin" && password === "1234") {
+    // SECURITY FIX: Read from Environment Variables
+    // This prevents the password from being seen in the GitHub code
+    const secureUser = import.meta.env.VITE_ADMIN_USER;
+    const securePass = import.meta.env.VITE_ADMIN_PASS;
+
+    if (username === secureUser && password === securePass) {
       localStorage.setItem('adminLoggedIn', 'true');
       setIsAdmin(true);
       return true;
